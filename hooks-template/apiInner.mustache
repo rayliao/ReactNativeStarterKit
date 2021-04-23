@@ -1,0 +1,131 @@
+{{#withSeparateModelsAndApi}}
+{{>licenseInfo}}
+
+
+import {
+  axios,
+  AxiosHookConfig,
+  AxiosHookOptions,
+  IClientResp,
+  useRequest,
+} from '../base'
+
+
+{{#imports}}
+// @ts-ignore
+import { {{classname}} } from '{{apiRelativeToRoot}}{{tsModelPackage}}';
+{{/imports}}
+{{/withSeparateModelsAndApi}}
+{{^withSeparateModelsAndApi}}
+{{/withSeparateModelsAndApi}}
+{{#operations}}
+
+{{#useSingleRequestParameter}}
+{{#operation}}
+{{#allParams.0}}
+/**
+ * Request parameters for {{nickname}} operation in {{classname}}.
+ * @export
+ * @interface {{classname}}{{operationIdCamelCase}}Request
+ */
+export interface {{classname}}{{operationIdCamelCase}}Request {
+    {{#allParams}}
+    /**
+     * {{description}}
+     * @type {{=<% %>=}}{<%&dataType%>}<%={{ }}=%>
+     * @memberof {{classname}}{{operationIdCamelCase}}
+     */
+    readonly {{paramName}}{{^required}}?{{/required}}: {{{dataType}}}
+    {{^-last}}
+
+    {{/-last}}
+    {{/allParams}}
+}
+
+{{/allParams.0}}
+{{/operation}}
+{{/useSingleRequestParameter}}
+{{#withInterfaces}}
+/**
+ * {{classname}} - object-oriented interface{{#description}}
+ * {{{description}}}{{/description}}
+ * @export
+ * @class {{classname}}
+ * @extends {BaseAPI}
+ */
+    {{#operation}}
+    /**
+     * {{&notes}}
+     {{#summary}}
+     * @summary {{&summary}}
+     {{/summary}}
+     {{#useSingleRequestParameter}}
+     {{#allParams.0}}
+     * @param {{=<% %>=}}{<%& classname %><%& operationIdCamelCase %>Request}<%={{ }}=%> requestParameters Request parameters.
+     {{/allParams.0}}
+     {{/useSingleRequestParameter}}
+     {{^useSingleRequestParameter}}
+     {{#allParams}}
+     * @param {{=<% %>=}}{<%&dataType%>}<%={{ }}=%> {{^required}}[{{/required}}{{paramName}}{{^required}}]{{/required}} {{description}}
+     {{/allParams}}
+     {{/useSingleRequestParameter}}
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof {{classname}}
+     */
+    {{#useSingleRequestParameter}}
+    export const {{nickname}} = ({{#allParams.0}}requestParameters: {{classname}}{{operationIdCamelCase}}Request{{^hasRequiredParams}} = {}{{/hasRequiredParams}}{{/allParams.0}}) => {
+         return axios.{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>(
+     `{{{path}}}`{{#pathParams}}
+                .replace(`{${"{{baseName}}"}}`, encodeURIComponent(String({{paramName}}))){{/pathParams}},
+	{{#hasParams}}{{#hasBodyOrFormParams}}requestParameters{{/hasBodyOrFormParams}}{{#hasQueryParams}}{params:requestParameters}{{/hasQueryParams}},{{/hasParams}}
+    )
+    }
+    {{/useSingleRequestParameter}}
+    {{^-last}}
+
+    {{/-last}}
+    {{/operation}}
+
+{{#operation}}
+    /**
+     * {{&notes}}
+     {{#summary}}
+     * @summary {{&summary}}
+     {{/summary}}
+     {{#useSingleRequestParameter}}
+     {{#allParams.0}}
+     * @param {{=<% %>=}}{<%& classname %><%& operationIdCamelCase %>Request}<%={{ }}=%> requestParameters Request parameters.
+     {{/allParams.0}}
+     {{/useSingleRequestParameter}}
+     {{^useSingleRequestParameter}}
+     {{#allParams}}
+     * @param {{=<% %>=}}{<%&dataType%>}<%={{ }}=%> {{^required}}[{{/required}}{{paramName}}{{^required}}]{{/required}} {{description}}
+     {{/allParams}}
+     {{/useSingleRequestParameter}}
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof {{classname}}
+     */
+    {{#useSingleRequestParameter}}
+    export const use{{operationIdCamelCase}} = ({{#allParams.0}}requestParameters: {{classname}}{{operationIdCamelCase}}Request{{^hasRequiredParams}} = {}{{/hasRequiredParams}}, {{/allParams.0}} options?: AxiosHookOptions,
+  config: AxiosHookConfig = {}) => {
+
+		return useRequest<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>({
+    url: `{{{path}}}`{{#pathParams}}
+                .replace(`{${"{{baseName}}"}}`, encodeURIComponent(String({{paramName}}))){{/pathParams}},
+    method: '{{httpMethod}}',
+	{{#hasParams}}{{#hasBodyOrFormParams}}data:requestParameters{{/hasBodyOrFormParams}}{{#hasQueryParams}}params:requestParameters{{/hasQueryParams}},{{/hasParams}}
+    ...config
+    },
+    options
+  )
+    }
+    {{/useSingleRequestParameter}}
+
+    {{^-last}}
+
+    {{/-last}}
+    {{/operation}}
+{{/withInterfaces}}
+{{/operations}}

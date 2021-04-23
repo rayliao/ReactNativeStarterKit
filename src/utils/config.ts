@@ -1,0 +1,3 @@
+export const ROOT_ID = {
+  BOTTOM_TABS_LAYOUT: 'BOTTOM_TABS_LAYOUT',
+};

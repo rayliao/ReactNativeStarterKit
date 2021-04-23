@@ -1,0 +1,8 @@
+{{>licenseInfo}}
+
+{{#withSeparateModelsAndApi}}
+{{#apiInfo}}{{#apis}}{{#operations}}
+/** {{classname}} */
+export * from './{{tsApiPackage}}/{{classFilename}}';
+{{/operations}}{{/apis}}{{/apiInfo}}
+{{/withSeparateModelsAndApi}}
