@@ -6,9 +6,10 @@
     "generators": {
       "hooks": {
         "enablePostProcessFile": true,
-        "output": "src/services",
+        "output": "src/hooks",
         "generatorName": "typescript-axios",
         "templateDir": "hooks-template",
+        "skipValidateSpec": true,
         "removeOperationIdPrefix": true,
         "additionalProperties": {
           "supportsES6": true,
@@ -18,7 +19,7 @@
           "modelPackage": "models",
           "apiPackage": "api"
         },
-        "inputSpec": "http://192.168.10.217:31050/swagger/v1/swagger.json"
+        "inputSpec": "swagger.yaml"
       }
     }
   }
