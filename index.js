@@ -10,8 +10,13 @@ import Btn from './src/components/Button';
 import Modal from './src/components/Modal';
 // import SideMenu from './src/components/SideMenu';
 import {loginRoot, mainRoot} from './src/routes';
+import codePush from 'react-native-code-push';
 
-Navigation.registerComponent('Home', () => App);
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+};
+
+Navigation.registerComponent('Home', () => codePush(codePushOptions)(App));
 Navigation.registerComponent('Setting', () => Setting);
 Navigation.registerComponent('Login', () => Login);
 Navigation.registerComponent('Btn', () => Btn);

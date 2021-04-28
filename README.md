@@ -16,3 +16,12 @@ API生成，如果要调试参数的话，在openapitools.json加上参数：
   "debugOperations": true
 },
 ```
+
+### 必须的
+
+- axios
+- openapi-generator-cli
+- react-native-navigation
+- react-native-make
+- react-native-splash-screen
+- App Center & Code Push(就是跟着教程走一遍了)
