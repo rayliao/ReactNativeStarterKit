@@ -11,6 +11,8 @@
     "services": "rm -rf src/petstore/**/*.ts && export TS_POST_PROCESS_FILE='npx prettier --write' && openapi-generator-cli generate"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^11.4.1",
+    "@react-native-firebase/auth": "^11.4.1",
     "appcenter": "^4.1.0",
     "appcenter-analytics": "^4.1.0",
     "appcenter-crashes": "^4.1.0",

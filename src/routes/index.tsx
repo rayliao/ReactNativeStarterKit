@@ -1,24 +1,19 @@
 import {LayoutRoot} from 'react-native-navigation';
-import {ROOT_ID} from '../utils/config';
+import {ComponentNames} from '../utils/config';
 
 export const mainRoot: LayoutRoot = {
   root: {
-    // sideMenu: {
-    //   center: {
-    //     stack: {
-    //       id: 'SideMenu',
-    //     },
-    //   },
-    // },
+    component: {
+      name: ComponentNames.Login,
+    },
     bottomTabs: {
-      id: ROOT_ID.BOTTOM_TABS_LAYOUT,
       children: [
         {
           stack: {
             children: [
               {
                 component: {
-                  name: 'Home',
+                  name: ComponentNames.Home,
                 },
               },
             ],
@@ -29,7 +24,7 @@ export const mainRoot: LayoutRoot = {
             children: [
               {
                 component: {
-                  name: 'Setting',
+                  name: ComponentNames.Setting,
                 },
               },
             ],
@@ -40,10 +35,10 @@ export const mainRoot: LayoutRoot = {
   },
 };
 
-export const loginRoot = {
-  root: {
-    component: {
-      name: 'Login',
-    },
-  },
-};
+// export const loginRoot = {
+//   root: {
+//     component: {
+//       name: 'Login',
+//     },
+//   },
+// };
